@@ -2,14 +2,15 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-6">
+    <footer className="bg-gray-900 text-gray-200 py-6 dark:bg-gray-800">
       <div className="container mx-auto text-center">
-        <p>&copy; {new Date().getFullYear()} EduTech+. All rights reserved.</p>
-        <div className="flex justify-center gap-4 mt-2">
-          <a to="/privacy" className="hover:underline">
+        <p className="text-sm mb-4">&copy; {new Date().getFullYear()} EduTech+. All rights reserved.</p>
+        <div className="flex justify-center gap-6 mt-2">
+          <a href="/privacy" className="text-gray-400 hover:text-gray-200 transition duration-200 ease-in-out">
             Privacy Policy
           </a>
-          <a to="/terms" className="hover:underline">
+          <span className="text-gray-400">|</span>
+          <a href="/terms" className="text-gray-400 hover:text-gray-200 transition duration-200 ease-in-out">
             Terms of Service
           </a>
         </div>

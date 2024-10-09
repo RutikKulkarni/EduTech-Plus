@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
-import { fetchCourses } from "../utils/api";
 
 const Dashboard = () => {
   const { userId } = useAuth();
