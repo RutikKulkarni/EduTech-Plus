@@ -1,53 +1,39 @@
-import React, { useState, useEffect } from "react";
-import Weather from "../components/Weather";
+import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "@clerk/clerk-react";
+import Sidebar from "../components/sidebar";
+import Analytics from "../components/Analytics";
+import Courses from "../components/Courses";
+import axios from "axios";
 
 const Dashboard = () => {
-  const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { userId } = useAuth();
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      setLoading(true);
-      setTimeout(() => {
-        setIsAuthenticated(true);
-        setLoading(false);
-      }, 1000);
+    const fetchCourses = async () => {
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+      setCourses(response.data.slice(0, 5));
     };
-
-    checkAuth();
+    fetchCourses();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-        <p className="text-2xl text-blue-500 dark:text-blue-300 font-bold animate-pulse">
-          Loading Dashboard...
-        </p>
-      </div>
-    );
-  }
+  if (!userId) return <Navigate to="/" replace />;
 
   return (
-    <div className="min-h-screen p-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex flex-col items-center justify-center">
-      <div className="w-full max-w-3xl mx-auto bg-white dark:bg-gray-900 shadow-xl rounded-lg p-8 transition-transform transform hover:scale-105">
-        <h1 className="text-4xl font-extrabold mb-6 text-gray-900 dark:text-white text-center">
-          🌤️ Weather Dashboard
+    <div className="min-h-screen flex">
+      <Sidebar />
+      <main className="flex-1 bg-gray-100 dark:bg-gray-900 p-6">
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">
+          Welcome to your Dashboard!
         </h1>
-        <div className="w-full border-t border-gray-200 dark:border-gray-700 my-4"></div>
-
-        {isAuthenticated ? (
-          <Weather />
-        ) : (
-          <div className="text-center">
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              Please log in to access the dashboard.
-            </p>
-            <button className="bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-indigo-600 dark:to-blue-700 text-white py-3 px-6 rounded-full shadow-lg hover:bg-blue-600 dark:hover:bg-indigo-800 transition-transform transform hover:scale-105 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700">
-              Log In
-            </button>
-          </div>
-        )}
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Courses courses={courses} />
+          <Analytics />
+        </div>
+      </main>
     </div>
   );
 };

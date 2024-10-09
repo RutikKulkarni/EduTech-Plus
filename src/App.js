@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-react";
 import LandingPage from "./pages/LandingPage";
+import Weather from "./pages/Weather";
 import Dashboard from "./pages/Dashboard";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -25,6 +26,19 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route
+              path="/weather"
+              element={
+                <>
+                  <SignedIn>
+                    <Weather />
+                  </SignedIn>
+                  <SignedOut>
+                    <Navigate to="/" replace />
+                  </SignedOut>
+                </>
+              }
+            />
             <Route
               path="/dashboard"
               element={
