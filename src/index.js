@@ -1,11 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React from "react";
+// import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { SnackbarProvider } from "notistack";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
+ReactDOM.render(
+  <SnackbarProvider maxSnack={3}>
     <App />
-  </React.StrictMode>
+  </SnackbarProvider>,
+  document.getElementById("root")
 );
