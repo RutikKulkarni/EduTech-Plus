@@ -20,7 +20,15 @@ const WeatherWidget = () => {
       );
       setWeatherData(response.data);
     } catch (err) {
-      setError("City not found. Please try again.");
+      if (err.response) {
+        // Server responded with a status code other than 200
+        setError("City not found. Please try another city.");
+      } else {
+        // Network error or other issue
+        setError(
+          "An error occurred while fetching weather data. Please try again later."
+        );
+      }
       setWeatherData(null);
     } finally {
       setLoading(false);
@@ -46,9 +54,17 @@ const WeatherWidget = () => {
         </button>
       </form>
 
-      {loading && <p className="text-blue-500 dark:text-blue-400 text-center font-medium">Fetching weather data...</p>}
+      {loading && (
+        <p className="text-blue-500 dark:text-blue-400 text-center font-medium">
+          Fetching weather data...
+        </p>
+      )}
 
-      {error && <p className="text-red-500 dark:text-red-400 text-center font-medium">{error}</p>}
+      {error && (
+        <p className="text-red-500 dark:text-red-400 text-center font-medium">
+          {error}
+        </p>
+      )}
 
       {weatherData && (
         <div className="mt-6 text-center">

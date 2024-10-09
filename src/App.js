@@ -15,46 +15,45 @@ import Navbar from "./components/Navbar";
 const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
 if (!clerkPubKey) {
-  throw new Error("Missing Clerk publishableKey");
+  throw new Error("Clerk publishableKey is missing.");
 }
+
+// Layout Component
+const Layout = ({ children }) => (
+  <>
+    <Navbar />
+    {children}
+    <Footer />
+  </>
+);
+
+// Protected Route Component
+const ProtectedRoute = ({ element }) => (
+  <>
+    <SignedIn>{element}</SignedIn>
+    <SignedOut>
+      <Navigate to="/" replace />
+    </SignedOut>
+  </>
+);
 
 function App() {
   return (
     <ClerkProvider publishableKey={clerkPubKey}>
       <Router>
-        <div>
-          <Navbar />
+        <Layout>
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route
               path="/weather"
-              element={
-                <>
-                  <SignedIn>
-                    <Weather />
-                  </SignedIn>
-                  <SignedOut>
-                    <Navigate to="/" replace />
-                  </SignedOut>
-                </>
-              }
+              element={<ProtectedRoute element={<Weather />} />}
             />
             <Route
               path="/dashboard"
-              element={
-                <>
-                  <SignedIn>
-                    <Dashboard />
-                  </SignedIn>
-                  <SignedOut>
-                    <Navigate to="/" replace />
-                  </SignedOut>
-                </>
-              }
+              element={<ProtectedRoute element={<Dashboard />} />}
             />
           </Routes>
-          <Footer />
-        </div>
+        </Layout>
       </Router>
     </ClerkProvider>
   );

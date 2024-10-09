@@ -53,7 +53,7 @@ const Navbar = () => {
         </button>
 
         <nav
-          className={`fixed top-16 left-0 w-full bg-white dark:bg-gray-900 lg:static lg:flex lg:gap-6 lg:items-center transition-all duration-300 ease-in-out ${
+          className={`fixed top-16 left-0 w-full lg:static lg:flex lg:gap-6 lg:items-center transition-all duration-300 ease-in-out ${
             isMenuOpen ? "block" : "hidden lg:block"
           }`}
         >
