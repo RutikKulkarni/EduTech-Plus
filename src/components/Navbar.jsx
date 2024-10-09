@@ -67,7 +67,13 @@ const Navbar = () => {
             className="block text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 px-4 py-2 rounded transition duration-200"
             to="/dashboard"
           >
-            Weather Dashboard
+            Dashboard
+          </Link>
+          <Link
+            className="block text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 px-4 py-2 rounded transition duration-200"
+            to="/weather"
+          >
+            Weather 
           </Link>
           <Link
             className="block text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 px-4 py-2 rounded transition duration-200"
