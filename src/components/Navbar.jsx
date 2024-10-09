@@ -41,7 +41,6 @@ const Navbar = () => {
         </span>
       </Link>
       <div className="ml-auto flex items-center relative">
-        {/* Hamburger Menu Icon */}
         <button
           onClick={toggleMenu}
           className="lg:hidden p-2 focus:outline-none"
@@ -53,7 +52,6 @@ const Navbar = () => {
           )}
         </button>
 
-        {/* Menu Items */}
         <nav
           className={`fixed top-16 left-0 w-full bg-white dark:bg-gray-900 lg:static lg:flex lg:gap-6 lg:items-center transition-all duration-300 ease-in-out ${
             isMenuOpen ? "block" : "hidden lg:block"
@@ -67,15 +65,9 @@ const Navbar = () => {
           </Link>
           <Link
             className="block text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 px-4 py-2 rounded transition duration-200"
-            to="#about"
+            to="/dashboard"
           >
-            About
-          </Link>
-          <Link
-            className="block text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 px-4 py-2 rounded transition duration-200"
-            to="#courses"
-          >
-            Courses
+            Weather Dashboard
           </Link>
           <Link
             className="block text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 px-4 py-2 rounded transition duration-200"
@@ -84,7 +76,6 @@ const Navbar = () => {
             Contact
           </Link>
 
-          {/* Theme Toggle Button */}
           <button
             onClick={handleThemeToggle}
             className="p-2 rounded focus:outline-none"
@@ -96,7 +87,6 @@ const Navbar = () => {
             )}
           </button>
 
-          {/* User information section */}
           {userId && (
             <div className="flex items-center px-4 py-2">
               <FaUserCircle className="text-gray-600 dark:text-gray-300 w-8 h-8 mr-2" />
@@ -106,7 +96,6 @@ const Navbar = () => {
             </div>
           )}
 
-          {/* Sign In/Out Button */}
           {userId ? (
             <SignOutButton mode="modal">
               <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200 text-xs font-semibold">
